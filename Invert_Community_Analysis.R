@@ -94,7 +94,15 @@ plot(canopy_accum)
 subcanopy_accum <- specaccum(subcanopy_mat)
 plot(subcanopy_accum)
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# EXPORT DATASETS                                                              ####
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+# Create wide csv for all data
+INVERT_SWATH_wide <- Inverts %>%
+  unite("surveyID", c(Date:Habitat, Interval)) %>%
+  pivot_wider(id_col = surveyID, names_from = genusSpecies, values_from = Count, values_fill = 0)
+write_csv(INVERT_SWATH_wide, "INVERT_SWATH_wide.csv")
 
 ####
 #<<<<<<<<<<<<<<<<<<<<<<<<<<END OF SCRIPT>>>>>>>>>>>>>>>>>>>>>>>>#
